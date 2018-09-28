@@ -14,13 +14,19 @@ If you have [Docker for Mac](https://docs.docker.com/docker-for-mac/) you can us
  - Click on the Docker icon in the top bar of your screen and select Preferences.
  - Click on the Kubernetes tab, enable it and choose Kubernetes, rather than Swarm.
 
+See the [docs](https://docs.docker.com/v17.09/docker-for-mac/#kubernetes) for more details.
+
 ### Linux
 
-TODO
+On Linux there are multiple options for running Kubernetes. A simple local environment is provided by [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/).
 
 ### Windows
 
-TODO
+If you have [Docker for Windows](https://docs.docker.com/docker-for-windows) you can use the built in Kubernetes.
+ - Open the Docker settings and click the Kubernetes tab
+ - Click "Enable Kubernetes"
+
+See the [docs](https://docs.docker.com/docker-for-windows/#kubernetes) for more details.
 
 ## Kubernetes CLI
 
