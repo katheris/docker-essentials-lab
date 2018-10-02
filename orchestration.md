@@ -79,22 +79,22 @@ First we will create a deployment to stand up the Python app.
 We will use the `deploy.yaml` in the `orchestration` folder of this repo:
 
 ```
-$ kubectl create -f deploy.yaml
-deployment "hello-deploy" created
+$ kubectl create -f orchestration/deploy.yaml
+deployment "hello-world-deploy" created
 ```
 
 See the deployment running and the pod it has created:
 
 ```
 $ kubectl get deployment
-NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-hello-deploy   1         1         1            1           28s
+NAME                 DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+hello-world-deploy   1         1         1            1           28s
 ```
 
 ```
 $ kubectl get pods
-NAME                            READY     STATUS    RESTARTS   AGE
-hello-deploy-7478bb6b9f-vjpd6   1/1       Running   0          1m
+NAME                                  READY     STATUS    RESTARTS   AGE
+hello-world-deploy-7478bb6b9f-vjpd6   1/1       Running   0          1m
 ```
 
 ## Scale the deployment
@@ -108,7 +108,7 @@ $ kubectl get pods -w
 In another update the deployment to increase the number of replicas to three:
 
 ```
-$ kubectl edit deployment hello-deploy
+$ kubectl edit deployment hello-world-deploy
 ```
 
  - Type `i` to start editing
@@ -117,31 +117,31 @@ $ kubectl edit deployment hello-deploy
 
 You should see the message:
 ```
-deployment "hello-deploy" edited
+deployment "hello-world-deploy" edited
 ```
 
 In the first window you should have seen more pods being created:
 ```
 $ kubectl get pods -w
-NAME                            READY     STATUS    RESTARTS   AGE
-hello-deploy-7478bb6b9f-vjpd6   1/1       Running   0          2m
-hello-deploy-7478bb6b9f-dtn6q   0/1       Pending   0         0s
-hello-deploy-7478bb6b9f-5dt9n   0/1       Pending   0         0s
-hello-deploy-7478bb6b9f-dtn6q   0/1       Pending   0         0s
-hello-deploy-7478bb6b9f-5dt9n   0/1       Pending   0         0s
-hello-deploy-7478bb6b9f-dtn6q   0/1       ContainerCreating   0         0s
-hello-deploy-7478bb6b9f-5dt9n   0/1       ContainerCreating   0         0s
-hello-deploy-7478bb6b9f-5dt9n   1/1       Running   0         3s
-hello-deploy-7478bb6b9f-dtn6q   1/1       Running   0         3s
+NAME                                  READY     STATUS    RESTARTS   AGE
+hello-world-deploy-7478bb6b9f-vjpd6   1/1       Running   0          2m
+hello-world-deploy-7478bb6b9f-dtn6q   0/1       Pending   0         0s
+hello-world-deploy-7478bb6b9f-5dt9n   0/1       Pending   0         0s
+hello-world-deploy-7478bb6b9f-dtn6q   0/1       Pending   0         0s
+hello-world-deploy-7478bb6b9f-5dt9n   0/1       Pending   0         0s
+hello-world-deploy-7478bb6b9f-dtn6q   0/1       ContainerCreating   0         0s
+hello-world-deploy-7478bb6b9f-5dt9n   0/1       ContainerCreating   0         0s
+hello-world-deploy-7478bb6b9f-5dt9n   1/1       Running   0         3s
+hello-world-deploy-7478bb6b9f-dtn6q   1/1       Running   0         3s
 ```
 
 There should now be three pods:
 ```
 $ kubectl get pods
-NAME                            READY     STATUS    RESTARTS   AGE
-hello-deploy-7478bb6b9f-5dt9n   1/1       Running   0          4m
-hello-deploy-7478bb6b9f-dtn6q   1/1       Running   0          4m
-hello-deploy-7478bb6b9f-vjpd6   1/1       Running   0          12m
+NAME                                  READY     STATUS    RESTARTS   AGE
+hello-world-deploy-7478bb6b9f-5dt9n   1/1       Running   0          4m
+hello-world-deploy-7478bb6b9f-dtn6q   1/1       Running   0          4m
+hello-world-deploy-7478bb6b9f-vjpd6   1/1       Running   0          12m
 ```
 
 ## Kubernetes self-healing
@@ -150,32 +150,32 @@ In a shell window watch the pods with `kubectl get pods -w`
 
 In a second window delete one of the pods:
 ```
-$ kubectl delete pod hello-deploy-7478bb6b9f-5dt9n
-pod "hello-deploy-7478bb6b9f-5dt9n" deleted
+$ kubectl delete pod hello-world-deploy-7478bb6b9f-5dt9n
+pod "hello-world-deploy-7478bb6b9f-5dt9n" deleted
 ```
 
 In the first window watch Kubernetes self-healing:
 
 ```
 $ kubectl get pods -w
-NAME                            READY     STATUS    RESTARTS   AGE
-hello-deploy-7478bb6b9f-5dt9n   1/1       Running   0          7m
-hello-deploy-7478bb6b9f-dtn6q   1/1       Running   0          7m
-hello-deploy-7478bb6b9f-vjpd6   1/1       Running   0          15m
-hello-deploy-7478bb6b9f-5dt9n   1/1       Terminating   0         7m
-hello-deploy-7478bb6b9f-lzfd2   0/1       Pending   0         0s
-hello-deploy-7478bb6b9f-lzfd2   0/1       Pending   0         0s
-hello-deploy-7478bb6b9f-lzfd2   0/1       ContainerCreating   0         0s
-hello-deploy-7478bb6b9f-lzfd2   1/1       Running   0         2s
+NAME                                  READY     STATUS    RESTARTS   AGE
+hello-world-deploy-7478bb6b9f-5dt9n   1/1       Running   0          7m
+hello-world-deploy-7478bb6b9f-dtn6q   1/1       Running   0          7m
+hello-world-deploy-7478bb6b9f-vjpd6   1/1       Running   0          15m
+hello-world-deploy-7478bb6b9f-5dt9n   1/1       Terminating   0         7m
+hello-world-deploy-7478bb6b9f-lzfd2   0/1       Pending   0         0s
+hello-world-deploy-7478bb6b9f-lzfd2   0/1       Pending   0         0s
+hello-world-deploy-7478bb6b9f-lzfd2   0/1       ContainerCreating   0         0s
+hello-world-deploy-7478bb6b9f-lzfd2   1/1       Running   0         2s
 ```
 
 You should now have three pods again:
 ```
 $ kubectl get pods
-NAME                            READY     STATUS    RESTARTS   AGE
-hello-deploy-7478bb6b9f-dtn6q   1/1       Running   0          9m
-hello-deploy-7478bb6b9f-lzfd2   1/1       Running   0          1m
-hello-deploy-7478bb6b9f-vjpd6   1/1       Running   0          17m
+NAME                                  READY     STATUS    RESTARTS   AGE
+hello-world-deploy-7478bb6b9f-dtn6q   1/1       Running   0          9m
+hello-world-deploy-7478bb6b9f-lzfd2   1/1       Running   0          1m
+hello-world-deploy-7478bb6b9f-vjpd6   1/1       Running   0          17m
 ```
 
 ## Create a Kubernetes service
@@ -183,13 +183,13 @@ hello-deploy-7478bb6b9f-vjpd6   1/1       Running   0          17m
 Create a service with a NodePort to make the pods addressable:
 
 ```
-$ kubectl apply -f service.yaml
-service "hello-service" created
+$ kubectl apply -f orchestration/service.yaml
+service "hello-world-service" created
 
 $ kubectl get services
-NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-hello-service   NodePort    10.111.244.203   <none>        8080:30000/TCP   15s
-kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP          38m
+NAME                  TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+hello-world-service   NodePort    10.111.244.203   <none>        8080:30000/TCP   15s
+kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP          38m
 ```
 
 You should now be able to curl 30000 to talk to the app:
@@ -208,39 +208,39 @@ First scale the existing deployment back down to 1 replica with `kubectl edit de
 Make sure you only have one pod running:
 ```
 $ kubectl get pods
-NAME                            READY     STATUS        RESTARTS   AGE
-hello-deploy-7478bb6b9f-vjpd6   1/1       Running       0          23m
+NAME                                  READY     STATUS        RESTARTS   AGE
+hello-world-deploy-7478bb6b9f-vjpd6   1/1       Running       0          23m
 ```
 
 Update your Python app to give a different message and rebuild it:
 
 ```
-$ docker build -t devcamp/hello-world:v2 .
+$ docker build -t hello-world:v2 .
 ```
 
-Update the `deploy.yaml` with the image name `devcamp/hello-world:v2` and give the deployment a different name.
+Update the `deploy.yaml` with the image name `hello-world:v2` and give the deployment a different name, e.g. `hello-world-deploy-v2`.
 
 Create the deployment:
 ```
 $ kubectl apply -f deploy.yaml 
-deployment "hello-deploy-v2" created
+deployment "hello-world-deploy-v2" created
 ```
 
 You should now have 2 deployments:
 ```
 $ kubectl get deployments
-NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-hello-deploy      1         1         1            1           27m
-hello-deploy-v2   1         1         1            1           13s
+NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+hello-world-deploy      1         1         1            1           27m
+hello-world-deploy-v2   1         1         1            1           13s
 ```
 
 and 2 pods:
 
 ```
 $ kubectl get pods
-NAME                               READY     STATUS    RESTARTS   AGE
-hello-deploy-7478bb6b9f-vjpd6      1/1       Running   0          27m
-hello-deploy-v2-5c495f6669-ltrvx   1/1       Running   0          38s
+NAME                                     READY     STATUS    RESTARTS   AGE
+hello-world-deploy-7478bb6b9f-vjpd6      1/1       Running   0          27m
+hello-world-deploy-v2-5c495f6669-ltrvx   1/1       Running   0          38s
 ```
 
 Try running the curl command multiple times and see it calling different versions of the app:
