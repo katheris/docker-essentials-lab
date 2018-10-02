@@ -215,10 +215,10 @@ hello-world-deploy-7478bb6b9f-vjpd6   1/1       Running       0          23m
 Update your Python app to give a different message and rebuild it:
 
 ```
-$ docker build -t hello-world:v2 .
+$ docker build -t python-hello-world:v2 .
 ```
 
-Update the `deploy.yaml` with the image name `hello-world:v2` and give the deployment a different name, e.g. `hello-world-deploy-v2`.
+Update the `deploy.yaml` with the image name `python-hello-world:v2` and give the deployment a different name, e.g. `hello-world-deploy-v2`.
 
 Create the deployment:
 ```
