@@ -1,4 +1,4 @@
-# Understanding Docker Layers
+# Updating your docker image
 
 These are the instructions for the third part of the workshop where you will be using Docker.
 
@@ -10,7 +10,7 @@ This docs assumes that you have already built a docker image and pushed it to th
 
 ### Deploy a change
 
-1.	Update app.py by replacing the string “Hello World” with “Hello Beautiful World!” in app.py. 
+1.	Update *app.py* by replacing the string **Hello World!** with **Hello Beautiful World!** in app.py. 
 Your file should have the following contents:
 ```
 from flask import Flask
