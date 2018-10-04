@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: hello-world-pod
-        image: python-hello-world:latest
+        image: python-hello-world:v1
         ports:
         - containerPort: 80

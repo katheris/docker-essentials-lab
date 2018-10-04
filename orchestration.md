@@ -28,6 +28,20 @@ If you have [Docker for Windows](https://docs.docker.com/docker-for-windows) you
 
 See the [docs](https://docs.docker.com/docker-for-windows/#kubernetes) for more details.
 
+### Kubernetes playground
+
+If none of the other options work for you and your Docker image is in Dockerhub you can use the [Kubernetes playground](https://labs.play-with-k8s.com) provided by Docker.
+
+Note: For the steps where you are passing a file, you can run the commands by entering the file contents in standard in like:
+
+```
+cat <<EOF | kubectl create -f -
+apiVersion: v1
+kind: Deployment
+EOF
+
+```
+
 ## Kubernetes CLI
 
 Kubernetes has a CLI called `kubectl` which should be already installed with Kubernetes.
@@ -212,13 +226,7 @@ NAME                                  READY     STATUS        RESTARTS   AGE
 hello-world-deploy-7478bb6b9f-vjpd6   1/1       Running       0          23m
 ```
 
-Update your Python app to give a different message and rebuild it:
-
-```
-$ docker build -t python-hello-world:v2 .
-```
-
-Update the `deploy.yaml` with the image name `python-hello-world:v2` and give the deployment a different name, e.g. `hello-world-deploy-v2`.
+Update the `deploy.yaml` with the image tag of your second version `python-hello-world:v2` and give the deployment a different name, e.g. `hello-world-deploy-v2`.
 
 Create the deployment:
 ```
