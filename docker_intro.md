@@ -1,6 +1,6 @@
 # Building and running a docker image
 
-These are the instructions for the third part of the workshop where you will be using Docker.
+These are the instructions for the first part of the Docker workshop.
 
 ## Pre-requisites
 
