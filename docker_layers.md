@@ -29,7 +29,7 @@ if __name__ == "__main__":
 2.	Now that your app is updated, you need to rebuild your app and push it to the [Docker Hub](https://hub.docker.com) registry.
 First rebuild, this time use your Docker Hub username in the build command.
 ```
-$  docker image build -t myusername/python-hello-world:v2 .
+$  docker build -t myusername/python-hello-world:v2 .
 Sending build context to Docker daemon  3.072kB
 Step 1/4 : FROM python:3.6.1-alpine
  ---> c86415c03c37
