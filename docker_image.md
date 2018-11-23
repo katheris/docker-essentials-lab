@@ -43,7 +43,7 @@ COPY app.py /app.py
 Pass in -t to name your image python-hello-world.
 
 ```
-$ docker image build -t python-hello-world .
+$ docker build -t python-hello-world .
 Sending build context to Docker daemon  3.072kB
 Step 1/4 : FROM python:3.6.1-alpine
 3.6.1-alpine: Pulling from library/python
