@@ -1,6 +1,9 @@
-# womENcourage 2018 - Docker Essentials: Deploying Your Apps in Containers
+# Deploying Your Apps in Containers
 
-This repository contains the workshop instructions for the womENcourage 2018 workshop "Docker Essentials: Deploying Your Apps in Containers".
+This repository contains the workshop instructions for "Docker Essentials: Deploying Your Apps in Containers" run at the following events:
+
+ - WomENcourage 2018
+ - Brunel University 2019
 
 ## Contents
 
